@@ -17,14 +17,19 @@ resource "google_compute_subnetwork" "custom_slave_subnet" {
   ip_cidr_range = "10.0.2.0/24"
 }
 
-resource "google_compute_firewall" "allow_firewall" {
+resource "google_compute_firewall" "allow_firewall_jenkins" {
   name    = var.firewall_name
   network = google_compute_network.custom_network.self_link
   direction = "INGRESS"
   priority = 1000
   
   allow {
-    protocol = "all"
+    protocol = "tcp"
+    ports    = ["22", "8080", "32768-60999", "4243"]
+  }
+  
+  allow {
+    protocol = "icmp"
   }
 
   source_ranges = ["0.0.0.0/0"]
