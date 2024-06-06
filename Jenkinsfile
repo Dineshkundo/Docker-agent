@@ -7,7 +7,7 @@ agent { dockerfile true }
     stages {
         stage('checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/SaravanaNani/terraform-ubuntu-desk-pro.git'
+                git branch: 'main', url: 'https://github.com/SaravanaNani/Docker-agent.git'
             }
         }
 
