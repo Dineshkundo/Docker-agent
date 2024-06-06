@@ -1,7 +1,5 @@
 pipeline {
-    agent {
-      label 'slave1'
-    }
+agent { dockerfile true }
     environment {
          GOOGLE_CREDENTIALS = credentials('json')  // manage jenkins -> credential -> king secrete text -> paste SA.Json.key
     }
