@@ -28,6 +28,23 @@ RUN wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor -o /usr/shar
     apt-get update && \
     apt-get install -y terraform
 
+    
+# Install crcmod package within the virtual environment
+RUN /venv/bin/pip install crcmod
+
+# Install the Google Cloud SDK
+RUN wget -q https://dl.google.com/dl/cloudsdk/release/google-cloud-sdk.tar.gz && \
+    tar -xf google-cloud-sdk.tar.gz && \
+    ./google-cloud-sdk/install.sh --quiet && \
+    rm google-cloud-sdk.tar.gz && \
+    ln -s /google-cloud-sdk/bin/gcloud /usr/bin/gcloud && \
+    /google-cloud-sdk/bin/gcloud components install kubectl
+
+# Set up SSH server
+RUN sed -i 's|session    required     pam_loginuid.so|session    optional     pam_loginuid.so|g' /etc/pam.d/sshd && \
+    mkdir -p /var/run/sshd
+
+
 # Create Jenkins user
 RUN useradd -m -d /var/lib/jenkins -s /bin/bash jenkins && \
     echo 'jenkins:jenkins' | chpasswd && \
