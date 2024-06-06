@@ -2,6 +2,10 @@ module "network" {
   source = "/root/Jenkins/modules/network"  # Adjust the path as needed
 }
 
+module "service-account" {
+source = "/root/Jenkins/modules/service-account"
+}
+
 locals {
   env = "master"
 }
@@ -28,7 +32,7 @@ resource "google_compute_instance" "my_instance" {
   }
 
   service_account {
-    email  = "default"
+    email  = module.service-account.svc_email
     scopes = ["https://www.googleapis.com/auth/cloud-platform"]
   }
 
