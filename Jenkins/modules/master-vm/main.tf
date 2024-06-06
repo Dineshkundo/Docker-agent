@@ -1,5 +1,5 @@
 module "network" {
-  source = "/root/terraform/network"  # Adjust the path as needed
+  source = "/root/Jenkins/modules/network"  # Adjust the path as needed
 }
 
 locals {
@@ -58,5 +58,12 @@ resource "google_compute_instance" "my_instance" {
     echo 'export M2_HOME=/opt/apache-maven-3.9.5' >> ~/.bashrc
     echo 'export PATH=$M2_HOME/bin:$PATH' >> ~/.bashrc
     source ~/.bashrc
+
+
+    # Installing docker
+    sudo apt install docker.io -y
+    sudo sed -i '14s|.*|ExecStart=/usr/bin/dockerd -H tcp://0.0.0.0:4243 -H unix:///var/run/docker.sock|' /lib/systemd/system/docker.service
+    sudo systemctl daemon-reload
+    sudo systemctl restart docker
   EOF
 }
