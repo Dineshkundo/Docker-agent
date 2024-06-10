@@ -5,6 +5,12 @@ provider "google" {
 locals {
   env = "desk"
 }
+terraform {
+  backend "gcs" {
+    bucket  = "saravana-desk-state-backup-bucket"
+    prefix  = "terraform/state"
+  }
+}
 
 resource "google_compute_subnetwork" "custom_subnet" {
   name          = "${local.env}-subnet-1"
