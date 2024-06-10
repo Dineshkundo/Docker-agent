@@ -61,3 +61,4 @@ tags = ["desktop"]
 metadata = {
   ssh-keys = "root:${file("/var/lib/jenkins/.ssh/id_rsa.pub")}"
 }
+}
