@@ -38,7 +38,7 @@ resource "google_compute_firewall" "allow_firewall" {
 resource "google_compute_instance" "my_instance" {
   name         = "${local.env}"
   machine_type = "n2-standard-2"
-  zone         = "us-east1-a"
+  zone         = "us-east1-d"
 
   boot_disk {
     auto_delete = true
