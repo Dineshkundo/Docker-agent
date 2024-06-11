@@ -14,7 +14,7 @@ terraform {
 
 resource "google_compute_subnetwork" "custom_subnet" {
   name          = "${local.env}-subnet-1"
-  region        = "us-west1"  # Specify the same region as the VPC
+  region        = "us-east1"  # Specify the same region as the VPC
   network       =  "projects/saravana95/global/networks/default-vpc"
   ip_cidr_range = "10.0.4.0/24"  # Specify the CIDR range for your subnets
 }
@@ -38,7 +38,7 @@ resource "google_compute_firewall" "allow_firewall" {
 resource "google_compute_instance" "my_instance" {
   name         = "${local.env}"
   machine_type = "n2-standard-2"
-  zone         = "us-west1-b"
+  zone         = "us-east1-a"
 
   boot_disk {
     auto_delete = true
