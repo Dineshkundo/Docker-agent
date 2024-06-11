@@ -43,7 +43,7 @@ pipeline {
                 script {
                     sh '''
                     sudo touch ${ANSIBLE_INVENTORY_PATH}
-                    private_ip=$(gcloud compute instances describe desk --zone us-west1-b --format='value(networkInterfaces[0].networkIP)')
+                    private_ip=$(gcloud compute instances describe desk --zone us-east1-d --format='value(networkInterfaces[0].networkIP)')
                     echo "[desktop]" | sudo tee -a ${ANSIBLE_INVENTORY_PATH}
                     echo "${private_ip}" | sudo tee -a ${ANSIBLE_INVENTORY_PATH}
                     '''
