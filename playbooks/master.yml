@@ -2,3 +2,4 @@
   roles:
     - python3
     - chrome-desktop
+    - destroy-desktop
