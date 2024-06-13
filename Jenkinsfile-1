@@ -1,6 +1,6 @@
 pipeline {
     agent {
-        label 'docker'
+        label 'docker-agent'
     }
     environment {
         ANSIBLE_INVENTORY_PATH = "/var/lib/jenkins/inventory.ini"
