@@ -13,7 +13,7 @@ pipeline {
                 }
             }
             steps {
-                git branch: 'main', url: 'https://github.com/SaravanaNani/Docker-agent.git'
+                git branch: 'main', url: 'https://github.com/Dineshkundo/Docker-agent.git'
             }
         }
         stage('Desktop-tfm-init') {
@@ -65,7 +65,7 @@ pipeline {
                 script {
                     sh '''
                     sudo touch ${ANSIBLE_INVENTORY_PATH}
-                    private_ip=$(gcloud compute instances describe default-desktop-server --zone us-west1-b --format='value(networkInterfaces[0].networkIP)')
+                    private_ip=$(gcloud compute instances describe test --zone us-central1-b --format='value(networkInterfaces[0].networkIP)')
                     echo "[desktop]" | sudo tee -a ${ANSIBLE_INVENTORY_PATH}
                     echo "${private_ip}" | sudo tee -a ${ANSIBLE_INVENTORY_PATH}
                     '''
