@@ -109,7 +109,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'ansible-playbook -i /var/lib/jenkins/inventory.ini playbook.yml -u root'
+                sh 'ansible-playbook -i /var/lib/jenkins/inventory.ini master.yml -u root'
             }
         }
     }
