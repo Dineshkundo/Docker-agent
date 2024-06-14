@@ -102,6 +102,17 @@ pipeline {
                 }
             }
         }
+         stage('Check SSH Connectivity') {
+            steps {
+                script {
+                    def target_ip = "10.128.0.10"
+                    def result = sh(script: "nc -zv ${target_ip} 22", returnStatus: true)
+                    if (result != 0) {
+                        error "SSH connectivity test failed for ${target_ip}"
+                    }
+                }
+            }
+        }
         stage('Conf-Desktop-server') {
             when {
                 expression {
