@@ -1,20 +1,20 @@
 - name: Install wget, tasksel, and python3
-    apt:
-      name: "{{ item }}"
-      state: present
-  with_items:
+  apt:
+    name: "{{ item }}"
+    state: present
+  loop:
     - wget
     - tasksel
-    
+    - python3
+
 - name: Download Debian Linux Chrome Remote Desktop installation package
-    get_url:
-      url: https://dl.google.com/linux/direct/chrome-remote-desktop_current_amd64.deb
-      dest: /tmp/chrome-remote-desktop_current_amd64.deb
+  get_url:
+    url: https://dl.google.com/linux/direct/chrome-remote-desktop_current_amd64.deb
+    dest: /tmp/chrome-remote-desktop_current_amd64.deb
 
 - name: Install the Debian Linux Chrome Remote Desktop installation package
-    apt:
-      deb: /tmp/chrome-remote-desktop_current_amd64.deb
-      state: present
+  apt:
+    deb: /tmp/chrome-remote-desktop_current_amd64.deb
 
 - name: Install Ubuntu desktop environment
   shell: DEBIAN_FRONTEND=noninteractive tasksel install ubuntu-desktop
@@ -28,5 +28,5 @@
   become: yes
 
 - name: Reboot your Ubuntu VM instance
-    reboot:
-      msg: "Reboot initiated by Ansible-container"   
+  reboot:
+    msg: "Reboot initiated by Ansible-container"
